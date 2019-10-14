@@ -186,6 +186,22 @@ app.on('ready', () => {
 
     const contextMenuTemplate: MenuItemConstructorOptions[] = [
       {
+        click: () => {
+          mainWindow.show()
+        },
+        label: 'Show',
+        visible: shouldStartMinimized,
+        id: 'show-win'
+      },
+      {
+        label: 'Hide',
+        visible: !shouldStartMinimized,
+        click: () => {
+          mainWindow.hide()
+        },
+        id: 'hide-win'
+      },
+      {
         role: 'quit'
       }
     ]
