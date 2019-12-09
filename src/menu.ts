@@ -242,6 +242,13 @@ const applicationMenu: MenuItemConstructorOptions[] = [
         label: 'Close',
         accelerator: 'Cmd+W',
         role: 'close'
+      },
+      {
+        label: 'Show',
+        accelerator: 'Cmd+1',
+        click() {
+          app.emit('activate')
+        }
       }
     ]
   },
