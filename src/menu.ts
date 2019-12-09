@@ -6,7 +6,11 @@ import { checkForUpdates } from './updates'
 import config, { ConfigKey } from './config'
 import { setCustomStyle, USER_CUSTOM_STYLE_PATH } from './custom-styles'
 import { viewLogs } from './logs'
-import { showRestartDialog, setAppMenuBarVisibility } from './utils'
+import {
+  showRestartDialog,
+  setAppMenuBarVisibility,
+  getMainWindow
+} from './utils'
 
 const APP_NAME = app.name
 
@@ -226,6 +230,13 @@ const applicationMenu: MenuItemConstructorOptions[] = [
         label: 'Select All',
         accelerator: 'Cmd+A',
         role: 'selectAll'
+      },
+      {
+        label: 'Find',
+        accelerator: 'Cmd+F',
+        click() {
+          getMainWindow().webContents.send('on-find')
+        }
       }
     ]
   },
@@ -294,6 +305,12 @@ if (is.development) {
           // Restart without firing quitting events
           app.relaunch()
           app.exit(0)
+        }
+      },
+      {
+        label: 'Open DevTools',
+        click() {
+          getMainWindow().webContents.openDevTools()
         }
       }
     ]

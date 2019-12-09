@@ -1,9 +1,8 @@
-import { ipcRenderer as ipc } from 'electron'
+import { ipcRenderer as ipc, remote } from 'electron'
 import log from 'electron-log'
-
 import { ConfigKey } from './config'
-
 import elementReady = require('element-ready')
+const { FindInPage } = require('electron-find')
 
 const INTERVAL = 1000
 let count: number
@@ -95,4 +94,9 @@ ipc.on('set-custom-style', (_: Event, key: ConfigKey, enabled: boolean) => {
 // Toggle a full screen class when a message is received from the main process
 ipc.on('set-full-screen', (_: Event, enabled: boolean) => {
   document.body.classList[enabled ? 'add' : 'remove']('full-screen')
+})
+
+ipc.on('on-find', () => {
+  const findInPage = new FindInPage(remote.getCurrentWebContents())
+  findInPage.openFindWindow()
 })
