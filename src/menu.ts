@@ -260,6 +260,11 @@ const applicationMenu: MenuItemConstructorOptions[] = [
         click() {
           app.emit('activate')
         }
+      },
+      {
+        label: 'Reload',
+        accelerator: 'Cmd+R',
+        role: 'forceReload'
       }
     ]
   },
